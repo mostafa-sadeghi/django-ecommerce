@@ -17,7 +17,7 @@ class TestViewResponses(TestCase):
         """
         Test allowed hosts
         """
-        response = self.client.get('/')
+        response = self.client.get('/', HTTP_HOST='noaddress.com')
         self.assertEqual(response.status_code, 200)
 
     def test_category_detail_url(self):
