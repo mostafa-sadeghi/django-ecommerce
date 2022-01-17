@@ -5,12 +5,26 @@
         <img src="{{product.image.url}}" width="100%" height="100%" alt="" />
     </div>
     <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="row p-3" style="align-items:center;">
       <h1>{{product.title}}</h1>
       <p><span>{{product.author}}</span></p>
       <p>{{ product.description | slice:"355"}}</p>
-      <p><input class="form-control" type="text" value="1"></p>
       <p>{{product.price}}</p>
-      <button class="btn btn-sm btn-danger" id="add-btn"><i class="fa fa-trash"></i>Buy</button>
+      </div>
+      <div class="row p-3" style="justify-content:center; align-items:center;">
+        <div class="col-5">
+          <label for="select"></label>
+          <select name="" id="select">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-sm btn-danger form-control" id="add-btn" value="{{product.id}}"><i class="fa fa-trash"></i>Buy</button>
+        </div>
+    </div>
     </div>
   </div>
 </section>
@@ -23,17 +37,19 @@
       type:'POST',
       url:"{% url "basket:basket_add" %}",
       data:{
-        product_id: $('#add-btn').val(),
+        productid: $('#add-btn').val(),
+        productqty:$('#select option:selected').text(),
         csrfmiddlewaretoken:"{{ csrf_token }}",
         action:'post'
 
       },
       success:function(json){
-
+        document.getElementById('basket_qty').innerHTML = json.qty;
+        $('#basket_qty').text(json.qty);
 
       },
       error:function(xhr, errmsg, err){
-
+          console.log(errmsg)
       }
     })
   });
