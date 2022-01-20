@@ -22,7 +22,6 @@ class TestProductModel(TestCase):
             category=category, created_by=self.created_by, title='django', slug='django', price=22.9)
 
     def test_product_model_creator(self):
-        print("test nikan")
         self.assertEqual(self.data.created_by, self.created_by)
 
     def test_product_model_entry_return(self):

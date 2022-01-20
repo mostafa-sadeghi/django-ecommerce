@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'store',
     'basket',
     'bootstrap5',
+    'account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,7 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.UserBase'
+LOGIN_REDIRECT_URL = '/account/dashboard'
+LOGIN_URL = '/account/login/'
